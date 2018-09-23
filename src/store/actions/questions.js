@@ -1,8 +1,8 @@
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+import { ActionTypes } from '../constants'
 
 export const receiveQuestions = (questions) => {
     return {
-        type: RECEIVE_QUESTIONS,
+        type: ActionTypes.RECEIVE_QUESTIONS,
         questions,        
     }
 }
