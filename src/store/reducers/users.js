@@ -1,6 +1,6 @@
 import { ActionTypes } from '../constants'
 
-export default users = (state = {}, action) => {
+export default (state = {}, action) => {
     switch(action.type) {
         case ActionTypes.RECEIVE_USERS:
             return {
@@ -8,6 +8,6 @@ export default users = (state = {}, action) => {
                 ...action.users
             }
         default:
-            return state;
+            return state
     }
 }
