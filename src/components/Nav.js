@@ -19,7 +19,12 @@ const Nav = () => {
                     <NavLink to='/leaderboard' activeClassName='active'>
                         Leader Board
                     </NavLink>
-                </li>                
+                </li>     
+                <li>
+                    <NavLink to='/login' activeClassName='active'>
+                        Login
+                    </NavLink>
+                </li>                              
             </ul>
         </nav>
     )
