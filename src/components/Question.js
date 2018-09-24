@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { formatQuestion, formatDate } from '../utils/helpers'
 import { OptionTypes } from '../store/constants/index'
 import { handleSaveAnswer } from '../store/actions/questions'
 
 
 class Question extends Component { 
-    toPoll(e, id) {
-        e.preventDefault()
-        console.log('go to detail poll')
-        // todo : go to poll when it is clicked
-    }
     handleOptionChange(e, id) {
         const answer = e.target.value
         const { dispatch } = this.props
@@ -19,15 +15,14 @@ class Question extends Component {
     }
     renderVoteHome(id, optionOneText) {
         return (
-            <div>
+            <Link to={`/question/${id}`}>
                 Would you rather...
                 {optionOneText}...
                 <button 
-                    onClick={(e) => this.toPoll(e, id)}
                 > 
                     View Poll 
                 </button>
-            </div>
+            </Link>
         )
     }
     renderVote(id, optionOneText, optionTwoText) {
@@ -69,8 +64,7 @@ class Question extends Component {
         )
     }
     render() {
-        const { question } = this.props;
-        const isHome = false; //todo: parse url
+        const { question, isHome } = this.props;
 
         if (question === null) {
             return <p>This question doesn't existed</p>
@@ -113,14 +107,15 @@ class Question extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, users, questions }, { id }) => {
+const mapStateToProps = ({ authedUser, users, questions }, { id, isHome=false }) => {
     const question = questions[id]
 
     return {
         authedUser,
         question: question
             ? formatQuestion(question, users[question.author], authedUser)
-            : null
+            : null,
+        isHome
     }
 }
 

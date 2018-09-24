@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitalData } from '../store/actions/shared'
 import Home from './Home';
 import NewQuestion from './NewQuestion';
 import QuestionPage from './QuestionPage';
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -13,12 +15,20 @@ class App extends Component {
     const { loading } = this.props;
 
     return (
-      <div>
-        {loading === true
-          ? null
-          : <QuestionPage match={{params: {id: "8xf0y6ziyjabvozdd253nd"}}} />
-        }
-      </div>
+      <Router>
+        <div className='container'>
+          <Nav />
+          {loading === true
+            ? null
+            : <div>
+                <Route path='/' exact component={Home} />
+                <Route path='/question/:id' component={QuestionPage} />
+                <Route path='/new' component={NewQuestion} />
+              </div>
+          }
+        </div>
+      </Router>
+
     );
   }
 }

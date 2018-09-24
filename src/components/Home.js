@@ -13,7 +13,7 @@ class Home extends Component {
                     <div> Answered Questions </div>
                     {answeredQIDs.map((id) => (
                         <li key={id}>
-                            <Question id={id} />
+                            <Question id={id} isHome={true} />
                         </li>
                     ))}
                 </ul>
@@ -21,7 +21,7 @@ class Home extends Component {
                     <div> UnAnswered Questions </div>
                     {unAnsweredQIDs.map((id) => (
                         <li key={id}>
-                            <Question id={id} />
+                            <Question id={id} isHome={true} />
                         </li>
                     ))}
                 </ul>
