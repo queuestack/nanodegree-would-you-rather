@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion, formatDate, OPTION_ONE, OPTION_TWO } from '../utils/helpers'
 
+
 class Question extends Component {
     toPoll(e, id) {
         e.preventDefault()
