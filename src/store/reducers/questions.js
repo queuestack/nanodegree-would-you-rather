@@ -14,6 +14,20 @@ export default (state = {}, action) => {
                 ...state,
                 [action.question.id]: question,
             }
+        case ActionTypes.SAVE_ANSWER:
+            const { authedUser, qid, answer } = action
+            console.log(authedUser, qid, answer)
+
+            return {
+                ...state,
+                [qid]: {
+                    ...state[qid],
+                    [answer]: {
+                        ...state[qid][answer],
+                        votes: state[qid][answer].votes.concat([authedUser]),
+                    },
+                },
+            };            
         default:
             return state
     }

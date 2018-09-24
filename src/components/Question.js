@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion, formatDate, OPTION_ONE, OPTION_TWO } from '../utils/helpers'
+import { formatQuestion, formatDate } from '../utils/helpers'
+import { OptionTypes } from '../store/constants/index'
+import { handleSaveAnswer } from '../store/actions/questions'
 
 
-class Question extends Component {
+class Question extends Component { 
     toPoll(e, id) {
         e.preventDefault()
         console.log('go to detail poll')
         // todo : go to poll when it is clicked
     }
-    handleVote(e, id) {
-        e.preventDefault()
-        console.log('save question answer')
-        // todo : save question answer : authedUser, qid, answer
+    handleOptionChange(e, id) {
+        const answer = e.target.value
+        const { dispatch } = this.props
+    
+        dispatch(handleSaveAnswer(id, answer))
     }
     renderVoteHome(id, optionOneText) {
         return (
@@ -27,27 +30,19 @@ class Question extends Component {
             </div>
         )
     }
-    renderVote(name, id, avatar, optionOneText, optionTwoText) {
+    renderVote(id, optionOneText, optionTwoText) {
         return (
             <div>
                 Would You Rather...
-                <form>
-                    <input 
-                        type="radio" 
-                        name="vote" 
-                        value={OPTION_ONE}
-                    /> {optionOneText}? <br/>
-                    <input 
-                        type="radio" 
-                        name="vote" 
-                        value={OPTION_TWO}
-                    /> {optionTwoText}? <br/>
-                    <input 
-                        type="submit" 
-                        value="Submit"
-                        onClick={(e) => this.handleVote(e, id)}
-                    />
-                </form>     
+                <button
+                    value={OptionTypes.OPTION_ONE}
+                    onClick={(e) => this.handleOptionChange(e, id)}
+                /> {optionOneText}? <br/>
+                <button
+                    value={OptionTypes.OPTION_TWO}
+                    onClick={(e) => this.handleOptionChange(e, id)}
+                /> {optionTwoText}? <br/>
+
             </div>                 
         )
     }
@@ -58,13 +53,13 @@ class Question extends Component {
             <div>
                 <div> Results: </div>
                 <div>
-                    {voted === OPTION_ONE ? <div> Your vote</div> : null}
+                    {voted === OptionTypes.OPTION_ONE ? <div> Your vote</div> : null}
                     <div> Would you rather {optionOneText}?</div>
-                    <div> {optionOneVotes / totalVotes}%</div>
+                    <div> {optionOneVotes / totalVotes * 100}%</div>
                     <div> {optionOneVotes} out of {totalVotes} votes</div>                
                 </div>
                 <div>
-                    {voted === OPTION_TWO ? <div> Your vote</div> : null}
+                    {voted === OptionTypes.OPTION_TWO ? <div> Your vote</div> : null}
                     <div> Would you rather {optionTwoText}?</div>
                     <div> {optionTwoVotes / totalVotes * 100}%</div>
                     <div> {optionTwoVotes} out of {totalVotes} votes</div>                
@@ -75,7 +70,7 @@ class Question extends Component {
     }
     render() {
         const { question } = this.props;
-        const isHome = true; //todo: parse url
+        const isHome = false; //todo: parse url
 
         if (question === null) {
             return <p>This question doesn't existed</p>
@@ -108,7 +103,7 @@ class Question extends Component {
                         ? this.renderVoteHome(id, optionOneText)
                         : voted
                             ? this.renderVoteResult(optionOneText, optionTwoText, optionOneVotes, optionTwoVotes, voted)
-                            : this.renderVote(name, id, avatar, optionOneText, optionTwoText)
+                            : this.renderVote(id, optionOneText, optionTwoText)
                     }
                 </div>
                 <br/>

@@ -3,4 +3,10 @@ export const ActionTypes = {
     RECEIVE_QUESTIONS: 'RECEIVE_QUESTIONS',
     RECEIVE_USERS: 'RECEIVE_USERS',
     ADD_QUESTION: 'ADD_QUESTION',
+    SAVE_ANSWER: 'SAVE_ANSWER',
 };
+
+export const OptionTypes = {
+    OPTION_ONE: 'optionOne',
+    OPTION_TWO: 'optionTwo'
+}

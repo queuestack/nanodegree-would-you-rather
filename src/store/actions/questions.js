@@ -28,3 +28,25 @@ export const handleAddQuestion = (optionOneText, optionTwoText) => {
             .then((question) => dispatch(addQuestion(question)))
     }
 }
+
+const saveAnswer = (authedUser, qid, answer) => {
+    return {
+        type: ActionTypes.SAVE_ANSWER,
+        authedUser,
+        qid,
+        answer,
+    }
+}
+
+export const handleSaveAnswer = (qid, answer) => {
+    return (dispatch, getState) => {
+        const { authedUser } = getState()
+
+        return saveQuestionAnswer({
+            authedUser, 
+            qid, 
+            answer
+        })
+            .then(() => dispatch(saveAnswer(authedUser, qid, answer)))
+    }
+}

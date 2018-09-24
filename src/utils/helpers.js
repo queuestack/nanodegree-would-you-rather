@@ -1,5 +1,4 @@
-export const OPTION_ONE = 'OPTION_ONE'
-export const OPTION_TWO = 'OPTION_TWO'
+import { OptionTypes } from '../store/constants/index'
 
 export function formatDate (timestamp) {
     const d = new Date(timestamp)
@@ -21,9 +20,9 @@ export const formatQuestion = (question, author, authedUser) => {
         optionOneText: optionOne.text,
         optionTwoText: optionTwo.text,
         voted: optionOne.votes.includes(authedUser) 
-                ? OPTION_ONE
+                ? OptionTypes.OPTION_ONE
                 : optionTwo.votes.includes(authedUser)
-                    ? OPTION_TWO
+                    ? OptionTypes.OPTION_TWO
                     : null
 
     })

@@ -22,8 +22,6 @@ class NewQuestion extends Component {
         })
     }
     handleSubmit = (e) => {
-        e.preventDefault()
-
         const { optionOneText, optionTwoText } = this.state
         const { dispatch } = this.props
 
