@@ -1,5 +1,5 @@
 import { getInitialData } from '../../utils/api';
-import { receiveQuestiosns } from './questions';
+import { receiveQuestions } from './questions';
 import { receiveUsers } from './users';
 import { setAuthedUser } from './authedUser';
 
@@ -9,7 +9,7 @@ export const handleInitalData = () => {
     return (dispatch) => {
         return getInitialData()
             .then(({ users, questions }) => {
-                dispatch(receiveQuestiosns(questions));
+                dispatch(receiveQuestions(questions));
                 dispatch(receiveUsers(users));
                 dispatch(setAuthedUser(AUTHED_ID));
             })
