@@ -4,6 +4,7 @@ export const ActionTypes = {
     RECEIVE_USERS: 'RECEIVE_USERS',
     ADD_QUESTION: 'ADD_QUESTION',
     SAVE_ANSWER: 'SAVE_ANSWER',
+    LOGOUT: 'LOGOUT'
 };
 
 export const OptionTypes = {

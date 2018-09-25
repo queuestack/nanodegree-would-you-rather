@@ -16,7 +16,7 @@ export default (state = {}, action) => {
             }
         case ActionTypes.SAVE_ANSWER:
             const { authedUser, qid, answer } = action
-            console.log(authedUser, qid, answer)
+            console.log(state)
 
             return {
                 ...state,

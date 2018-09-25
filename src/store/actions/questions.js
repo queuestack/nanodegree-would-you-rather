@@ -19,7 +19,6 @@ export const handleAddQuestion = (optionOneText, optionTwoText) => {
     return (dispatch, getState) => {
         const { authedUser } = getState()
 
-        // save database first, get the saved result from DB and add it to reducer
         return saveQuestion({
             optionOneText,
             optionTwoText,

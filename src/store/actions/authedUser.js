@@ -6,3 +6,9 @@ export const setAuthedUser = (id) => {
         id,
     }
 }
+
+export const logout = () => {
+    return {
+        type: ActionTypes.LOGOUT
+    }
+}
