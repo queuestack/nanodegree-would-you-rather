@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitalData } from '../store/actions/shared'
 import Home from './Home';
@@ -8,6 +8,7 @@ import QuestionPage from './QuestionPage';
 import Nav from './Nav'
 import LeaderBoard from './LeaderBoard';
 import Login from './Login';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
   componentDidMount() {
@@ -20,16 +21,33 @@ class App extends Component {
       <Router>
         <div className='container'>
           <Nav />
-          {loading
-            ? <Route path='/login' component={Login} />
-            : <div>
-                <Route path='/' exact component={Home} />
-                <Route path='/question/:id' component={QuestionPage} />
-                <Route path='/new' component={NewQuestion} />
-                <Route path='/leaderboard' component={LeaderBoard} />
-                <Route path='/login' component={Login} />
-              </div>
-          }
+          <Switch>
+            <PrivateRoute
+              path="/"
+              exact
+              component={Home}
+            />
+            <Route
+              path="/login"
+              exact
+              component={Login}
+            />
+            <PrivateRoute
+              path="/leaderboard"
+              exact
+              component={LeaderBoard}
+            />
+            <PrivateRoute
+              path="/new"
+              exact
+              component={NewQuestion}
+            />
+            <PrivateRoute
+              path="/question/:id"
+              exact
+              component={QuestionPage}
+            />
+          </Switch>          
         </div>
       </Router>
 

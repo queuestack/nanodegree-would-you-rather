@@ -19,7 +19,6 @@ export default (state = {}, action) => {
                     ]
                 }
             }
-            
         case ActionTypes.SAVE_ANSWER:
             return {
               ...state,
