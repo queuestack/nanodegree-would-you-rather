@@ -11,7 +11,7 @@ class Nav extends Component {
     }
 
     render() {
-        const { authedUser } = this.props
+        const { authedUser, isLogin } = this.props
 
 
         return (
@@ -23,7 +23,7 @@ class Nav extends Component {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to='/new' activeClassName='active'>
+                        <NavLink to='/add' activeClassName='active'>
                             New Question
                         </NavLink>
                     </li>
@@ -34,14 +34,20 @@ class Nav extends Component {
                     </li>     
                     <li>
                         {
-                            authedUser === null
-                            ? <NavLink to='/login' activeClassName='active'>
+                            isLogin
+                            ? <div onClick={this.handleLogout.bind(this)}>Logout</div>
+                            : <NavLink to='/login' activeClassName='active'>
                                 Login
                             </NavLink>
-                            : <div onClick={this.handleLogout.bind(this)}>Logout</div>
     
                         }
-    
+                    </li>
+                    <li>
+                        {
+                            isLogin
+                            ? authedUser
+                            : null
+                        }
                     </li>                              
                 </ul>
             </nav>
@@ -51,7 +57,8 @@ class Nav extends Component {
 
 const mapStateToProps = ({ authedUser }) => {
     return {
-        authedUser
+        authedUser,
+        isLogin: authedUser !== null,
     }
 }
 

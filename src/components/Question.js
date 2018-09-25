@@ -15,7 +15,7 @@ class Question extends Component {
     }
     renderVoteHome(id, optionOneText) {
         return (
-            <Link to={`/question/${id}`}>
+            <Link to={`/questions/${id}`}>
                 Would you rather...
                 {optionOneText}...
                 <button 
