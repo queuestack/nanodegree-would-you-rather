@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../store/actions/authedUser'
+import { Menu } from 'semantic-ui-react'
+
+const HOME = 'Home'
+const NEW_QUESTION = 'New Question'
+const LEADER_BOARD = 'Leader Board'
+const LOGIN = 'Login'
+const LOGOUT = 'Logout'
 
 class Nav extends Component {
     handleLogout() {
@@ -13,44 +20,47 @@ class Nav extends Component {
     render() {
         const { authedUser, isLogin } = this.props
 
-
         return (
-            <nav className='nav'>
-                <ul>
-                    <li>
-                        <NavLink to='/' exact activeClassName='active'>
-                            Home
+            <div>
+                <Menu pointing secondary>
+                    <Menu.Item>
+                        <NavLink to='/' name={HOME} exact activeClassName='active'>
+                            {HOME}
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/add' activeClassName='active'>
-                            New Question
+                    </Menu.Item>
+                    <Menu.Item>
+                        <NavLink to='/add' name={NEW_QUESTION} activeClassName='active'>
+                            {NEW_QUESTION}
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/leaderboard' activeClassName='active'>
-                            Leader Board
+                    </Menu.Item>
+                    <Menu.Item>
+                        <NavLink to='/leaderboard' name={LEADER_BOARD} activeClassName='active'>
+                            {LEADER_BOARD}
                         </NavLink>
-                    </li>     
-                    <li>
-                        {
-                            isLogin
-                            ? <div onClick={this.handleLogout.bind(this)}>Logout</div>
-                            : <NavLink to='/login' activeClassName='active'>
-                                Login
-                            </NavLink>
-    
-                        }
-                    </li>
-                    <li>
-                        {
-                            isLogin
-                            ? authedUser
-                            : null
-                        }
-                    </li>                              
-                </ul>
-            </nav>
+                    </Menu.Item>   
+                    <Menu.Menu position='right'>  
+                        <Menu.Item>
+                            {
+                                isLogin
+                                ? authedUser
+                                : null
+                            }
+                        </Menu.Item>
+                        <Menu.Item>
+                            {
+                                isLogin
+                                ? <a name={LOGOUT} onClick={this.handleLogout.bind(this)}>
+                                    {LOGOUT}
+                                </a>
+                                : <NavLink to='/login' name={LOGIN} activeClassName='active'>
+                                    {LOGIN}
+                                </NavLink>
+        
+                            }
+                        </Menu.Item>                   
+                    </Menu.Menu>
+                </Menu>
+            </div>
         )
     }
 }
