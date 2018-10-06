@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { setAuthedUser } from '../store/actions/authedUser'
+import { Image, List } from 'semantic-ui-react';
 
 class Login extends Component {
-    handleLogin(e) {
-        const id = e.target.value
+    handleLogin(e, id) {
+        console.log(id)
 
         const { dispatch } = this.props
 
@@ -19,20 +20,25 @@ class Login extends Component {
         }
 
         return (
-            <div>
+            <List selection verticalAlign='middle'>
                 {Object.keys(users).map(user => {
                     const { name, id, avatarURL } = users[user]
                     return (
-                        <button 
+                        <List.Item 
                             key={name}
-                            value={id}
-                            onClick={this.handleLogin.bind(this)}
                         >
-                            {`name: ${name}`}
-                        </button>
+                            <List.Content>
+                                <Image avatar src={avatarURL}/>
+                                <List.Header
+                                    onClick={e => this.handleLogin(e, id)}
+                                >
+                                    {name}
+                                </List.Header>
+                            </List.Content>
+                        </List.Item>
                     )
                 })}
-            </div>
+            </List>
         )
     }
 }
