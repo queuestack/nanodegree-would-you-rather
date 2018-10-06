@@ -1,30 +1,58 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Menu, List } from 'semantic-ui-react'
+
 import Question from './Question'
 
+const ANSWER = 'answerd'
+const UNANSWER = 'unanswerd'
+
 class Home extends Component {
+    state = {
+        activeItem: ANSWER
+    }
+    
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    
     render() {
         const { answeredQIDs, unAnsweredQIDs } = this.props;
+        const { activeItem } = this.state
 
         return (
             <div>
-                <h3 className='center'>Your Timeline</h3>
-                <ul className='home-answerd-list'>
-                    <div> Answered Questions </div>
-                    {answeredQIDs.map((id) => (
-                        <li key={id}>
-                            <Question id={id} isHome={true} />
-                        </li>
-                    ))}
-                </ul>
-                <ul className='home-unanswerd-list'>
-                    <div> UnAnswered Questions </div>
-                    {unAnsweredQIDs.map((id) => (
-                        <li key={id}>
-                            <Question id={id} isHome={true} />
-                        </li>
-                    ))}
-                </ul>
+                <Menu pointing>
+                    <Menu.Item 
+                        name={ANSWER}
+                        active={activeItem === ANSWER} 
+                        onClick={this.handleItemClick} 
+                    />
+                    <Menu.Item
+                        name={UNANSWER}
+                        active={activeItem === UNANSWER}
+                        onClick={this.handleItemClick}
+                    />
+                </Menu>
+                {
+                    activeItem === ANSWER
+                    ?
+                    <ul className='home-answerd-list'>
+                        <List celled> Answered Questions </List>
+                        {answeredQIDs.map((id) => (
+                            <List.Item key={id}>
+                                <Question id={id} isHome={true} />
+                            </List.Item>
+                        ))}
+                    </ul>
+                    :
+                    <ul className='home-unanswerd-list'>
+                        <List celled> UnAnswered Questions </List>
+                        {unAnsweredQIDs.map((id) => (
+                            <List.Item key={id}>
+                                <Question id={id} isHome={true} />
+                            </List.Item>
+                        ))}
+                    </ul>
+                }           
             </div>
         )
     }
