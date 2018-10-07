@@ -5,6 +5,7 @@ import { formatQuestion, formatDate } from '../utils/helpers'
 import { OptionTypes } from '../store/constants/index'
 import { handleSaveAnswer } from '../store/actions/questions'
 
+import { Button, Card, Image } from 'semantic-ui-react'
 
 class Question extends Component { 
     handleOptionChange(e, id) {
@@ -16,51 +17,83 @@ class Question extends Component {
     renderVoteHome(id, optionOneText) {
         return (
             <Link to={`/questions/${id}`}>
-                Would you rather...
-                {optionOneText}...
-                <button 
-                > 
-                    View Poll 
-                </button>
+                <Card.Content>
+                    <Card.Description>
+                        Would you rather {optionOneText}...
+                    </Card.Description>
+                    <Button basic color='green'
+                    > 
+                        View Poll
+                    </Button>
+                </Card.Content>
             </Link>
         )
     }
     renderVote(id, optionOneText, optionTwoText) {
         return (
-            <div>
-                Would You Rather...
-                <button
-                    value={OptionTypes.OPTION_ONE}
-                    onClick={(e) => this.handleOptionChange(e, id)}
-                /> {optionOneText}? <br/>
-                <button
-                    value={OptionTypes.OPTION_TWO}
-                    onClick={(e) => this.handleOptionChange(e, id)}
-                /> {optionTwoText}? <br/>
-
-            </div>                 
+            <Card.Content extra>
+                <Card.Description>
+                    Would You Rather...
+                </Card.Description>
+                <div className='ui two buttons'>
+                    <Button
+                        basic
+                        color='green'
+                        value={OptionTypes.OPTION_ONE}
+                        onClick={(e) => this.handleOptionChange(e, id)}
+                    > 
+                        {optionOneText}? 
+                    </Button>
+                    <Button
+                        basic
+                        color='red'                    
+                        value={OptionTypes.OPTION_TWO}
+                        onClick={(e) => this.handleOptionChange(e, id)}
+                    > 
+                        {optionTwoText}? 
+                    </Button>
+                </div>
+            </Card.Content>                 
         )
     }
     renderVoteResult(optionOneText, optionTwoText, optionOneVotes, optionTwoVotes, voted) {
         const totalVotes = optionOneVotes + optionTwoVotes
 
         return (
-            <div>
-                <div> Results: </div>
-                <div>
-                    {voted === OptionTypes.OPTION_ONE ? <div> Your vote</div> : null}
-                    <div> Would you rather {optionOneText}?</div>
-                    <div> {optionOneVotes / totalVotes * 100}%</div>
-                    <div> {optionOneVotes} out of {totalVotes} votes</div>                
-                </div>
-                <div>
-                    {voted === OptionTypes.OPTION_TWO ? <div> Your vote</div> : null}
-                    <div> Would you rather {optionTwoText}?</div>
-                    <div> {optionTwoVotes / totalVotes * 100}%</div>
-                    <div> {optionTwoVotes} out of {totalVotes} votes</div>                
-                </div>
-            </div>
+            <Card.Group>
+                <Card
+                    color={voted === OptionTypes.OPTION_ONE ? 'red' : null}
+                >
+                    <Card.Content>
+                        <Card.Header> Would you rather {optionOneText}?</Card.Header>
+                        <Card.Meta> {optionOneVotes / totalVotes * 100}%</Card.Meta>
+                        <Card.Description> {optionOneVotes} out of {totalVotes} votes</Card.Description>                
+                    </Card.Content>
+                </Card>
+                <Card
+                    color={voted === OptionTypes.OPTION_TWO ? 'red' : null}
+                >
+                    <Card.Content>
+                        <Card.Header> Would you rather {optionTwoText}?</Card.Header>
+                        <Card.Meta> {optionTwoVotes / totalVotes * 100}%</Card.Meta>
+                        <Card.Description> {optionTwoVotes} out of {totalVotes} votes</Card.Description>                
+                    </Card.Content>
+                </Card>                
+            </Card.Group>
 
+
+        )
+    }
+    renderHeader() {
+        const { isHome } = this.props
+        const { name, voted } = this.props.question
+
+        return (
+            isHome 
+            ? <span> {name} asks: </span>
+            : voted
+                ? <span> Asked by {name} </span>
+                : <span> {name} asks: </span>
         )
     }
     render() {
@@ -77,32 +110,29 @@ class Question extends Component {
         } = question
 
         return (
-            <div className='question'>
-                <br/>
-                {
-                    isHome 
-                        ? <span> {name} asks: </span>
-                        : voted
-                            ? <span> Asked by {name} </span>
-                            : <span> {name} asks: </span>   
-                }
-                <img
-                    src={avatar}
-                    alt={`Avatar of ${name}`}
-                    className='Avatar'
-                />
-                <div className='question-info'>             
-                    {
-                        isHome
-                        ? this.renderVoteHome(id, optionOneText)
-                        : voted
-                            ? this.renderVoteResult(optionOneText, optionTwoText, optionOneVotes, optionTwoVotes, voted)
-                            : this.renderVote(id, optionOneText, optionTwoText)
-                    }
-                </div>
-                <br/>
-            </div>               
-
+            <Card.Group>
+                <Card>
+                    <Card.Content>
+                        <Image 
+                            floated='right' 
+                            size='mini' 
+                            src={avatar} 
+                        />
+                        <Card.Header>
+                            { this.renderHeader() }
+                        </Card.Header>
+                        <Card.Description>
+                            {
+                                isHome
+                                ? this.renderVoteHome(id, optionOneText)
+                                : voted
+                                    ? this.renderVoteResult(optionOneText, optionTwoText, optionOneVotes, optionTwoVotes, voted)
+                                    : this.renderVote(id, optionOneText, optionTwoText)
+                            }
+                        </Card.Description>                        
+                    </Card.Content>
+                </Card>
+            </Card.Group>
         )
     }
 }
