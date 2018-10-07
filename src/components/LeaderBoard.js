@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Card } from 'semantic-ui-react'
 
 class LeaderBoard extends Component {
     render() {
@@ -7,11 +8,21 @@ class LeaderBoard extends Component {
         return (
             <div>
                 {users.map(user => {
-                    const { score, numAnswers, numQuestions } = user
+                    const { score, numAnswers, numQuestions, avatar } = user
                     return (
-                        <div key={user.user}>
-                            {`${user.user} : ${score} (Q: ${numQuestions}, A: ${numAnswers})`}
-                        </div>
+                        <Card 
+                            key={user.user}
+                            image={avatar}
+                            header={user.user}
+                            description={
+                                <Card.Description>
+                                    <div>Answered questions: {numQuestions}</div>
+                                    <div>Created questions: {numAnswers}</div>
+                                    <div>Score: {score}</div>
+                                </Card.Description>
+
+                            }
+                        />
                     )
                 })}
             </div>
@@ -27,8 +38,9 @@ const mapStateToProps = ({ users }, props) => {
         const questions = users[user].questions
         const numQuestions = questions.length
         const score = numAnswers + numQuestions
+        const avatar = users[user].avatarURL
 
-        return {user, score, numAnswers, numQuestions}
+        return {user, score, numAnswers, numQuestions, avatar}
     })
 
 
