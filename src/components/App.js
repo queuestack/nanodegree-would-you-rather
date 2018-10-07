@@ -16,7 +16,6 @@ class App extends Component {
     this.props.dispatch(handleInitalData());
   }
   render() {
-    const { loading } = this.props;
 
     return (
       <Router>
@@ -59,10 +58,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
-  return {
-    loading: authedUser === null
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

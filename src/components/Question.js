@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { formatQuestion, formatDate } from '../utils/helpers'
+import { formatQuestion } from '../utils/helpers'
 import { OptionTypes } from '../store/constants/index'
 import { handleSaveAnswer } from '../store/actions/questions'
 
@@ -104,7 +104,7 @@ class Question extends Component {
         }
 
         const { 
-            name, id, timestamp, avatar, 
+            id, avatar, 
             optionOneVotes, optionTwoVotes, 
             optionOneText, optionTwoText, voted
         } = question
