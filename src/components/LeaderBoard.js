@@ -16,8 +16,8 @@ class LeaderBoard extends Component {
                             header={user.user}
                             description={
                                 <Card.Description>
-                                    <div>Answered questions: {numQuestions}</div>
-                                    <div>Created questions: {numAnswers}</div>
+                                    <div>Answered questions: {numAnswers}</div>
+                                    <div>Created questions: {numQuestions}</div>
                                     <div>Score: {score}</div>
                                 </Card.Description>
 
