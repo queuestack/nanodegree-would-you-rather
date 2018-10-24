@@ -9,7 +9,7 @@ const UNANSWER = 'unanswerd'
 
 class Home extends Component {
     state = {
-        activeItem: ANSWER
+        activeItem: UNANSWER
     }
     
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
