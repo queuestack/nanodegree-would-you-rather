@@ -24,11 +24,11 @@ class Login extends Component {
                 <Header>
                     Please Sign In To Continue
                 </Header>
-                <Card.Group selection verticalAlign='middle'>
+                <Card.Group>
                     {Object.keys(users).map(user => {
                         const { name, id, avatarURL } = users[user]
                         return (
-                            <Card>
+                            <Card key={id}>
                                 <Card.Content>
                                     <Image floated='right' avatar src={avatarURL}/>
                                     <Card.Header
