@@ -7,7 +7,9 @@ class NotFound extends Component {
             <div>
                 404 Not Found
                 <Link to="/">
-                    Go Back Home
+                    <div>
+                        Go Back Home
+                    </div>
                 </Link>                      
             </div>
       
