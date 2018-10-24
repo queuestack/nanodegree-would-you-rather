@@ -66,7 +66,7 @@ class Question extends Component {
                 >
                     <Card.Content>
                         <Card.Header> Would you rather {optionOneText}?</Card.Header>
-                        <Card.Meta> {optionOneVotes / totalVotes * 100}%</Card.Meta>
+                        <Card.Meta> {Math.floor(optionOneVotes / totalVotes * 100)}%</Card.Meta>
                         <Card.Description> {optionOneVotes} out of {totalVotes} votes</Card.Description>                
                     </Card.Content>
                 </Card>
@@ -75,7 +75,7 @@ class Question extends Component {
                 >
                     <Card.Content>
                         <Card.Header> Would you rather {optionTwoText}?</Card.Header>
-                        <Card.Meta> {optionTwoVotes / totalVotes * 100}%</Card.Meta>
+                        <Card.Meta> {Math.floor(optionTwoVotes / totalVotes * 100)}%</Card.Meta>
                         <Card.Description> {optionTwoVotes} out of {totalVotes} votes</Card.Description>                
                     </Card.Content>
                 </Card>                
