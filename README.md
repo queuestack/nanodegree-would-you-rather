@@ -9,7 +9,7 @@ This project consists in a small quiz game, of course built in React & Redux, th
 ![logout](screenshots/logout.png)
 User is forced to login before using other service.
 
-![login](screenshots/login.png)
+![home](screenshots/home.png)
 User is redirected to unanswerd questions wen user login to service.<br/>
 
 ### Questions
