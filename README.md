@@ -7,9 +7,26 @@ This project consists in a small quiz game, of course built in React & Redux, th
 ## Features
 ### Login & Logout
 ![logout](screenshots/logout.png)
+User is forced to login before using other service.
+
 ![login](screenshots/login.png)
-User can't use other features if user don't login to service.
-When user login to service, user is redirected to unanswerd questions.
+User is redirected to unanswerd questions wen user login to service.<br/>
+
+### Questions
+![unanswered](screenshots/unanswered-question.png)
+User can choose the answer when user click the quesiton card.<br/>
+
+![answered](screenshots/answered-result.png)
+User can see the quiz result only after answering the question.<br/>
+
+![new question](screenshots/new-question.png)
+User can make new question.<br/>
+New question is added to unanswerd questions list.<br/>
+
+### Leader board
+![leader-board](screenshots/leader-board.png)
+User see the ranking. Ranking is determined by number of questions and answers.<br/>
+
 
 ## How to Load the App
 ```
